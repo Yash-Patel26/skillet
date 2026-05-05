@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.skillet.in"
+    namespace = "com.skillet.app"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
