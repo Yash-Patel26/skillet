@@ -6,11 +6,26 @@ import '../l10n/app_localizations.dart';
 import 'providers.dart';
 import 'router.dart';
 
-class SkilletApp extends ConsumerWidget {
+class SkilletApp extends ConsumerStatefulWidget {
   const SkilletApp({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<SkilletApp> createState() => _SkilletAppState();
+}
+
+class _SkilletAppState extends ConsumerState<SkilletApp> {
+  @override
+  void initState() {
+    super.initState();
+    Future<void>(() async {
+      await ref.read(pushNotificationsServiceProvider).init(
+            onOpenRecipe: (id) => ref.read(routerProvider).go('/recipe/$id'),
+          );
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final router = ref.watch(routerProvider);
     final themeMode = ref.watch(themeModeProvider);
     final locale = ref.watch(localeProvider);

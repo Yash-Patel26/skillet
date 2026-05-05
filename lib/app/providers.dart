@@ -7,6 +7,7 @@ import '../data/api/weather_client.dart';
 import '../data/local/favorites_db.dart';
 import '../data/local/notifications_service.dart';
 import '../data/local/prefs_store.dart';
+import '../data/local/push_notifications_service.dart';
 import '../data/models/user_prefs.dart';
 import '../data/repositories/favorites_repository.dart';
 import '../data/repositories/recipe_repository.dart';
@@ -29,6 +30,10 @@ final favoritesDbProvider = Provider<FavoritesDb>((ref) => FavoritesDb());
 
 final notificationsServiceProvider =
     Provider<NotificationsService>((ref) => NotificationsService());
+
+final pushNotificationsServiceProvider = Provider<PushNotificationsService>(
+  (ref) => PushNotificationsService(ref.watch(notificationsServiceProvider)),
+);
 
 final recipeRepositoryProvider = Provider<RecipeRepository>(
   (ref) => RecipeRepository(

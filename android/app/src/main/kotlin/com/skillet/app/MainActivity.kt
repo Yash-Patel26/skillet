@@ -1,4 +1,4 @@
-package com.skillet.skillet
+package com.skillet.app
 
 import io.flutter.embedding.android.FlutterActivity
 
