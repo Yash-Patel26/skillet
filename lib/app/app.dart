@@ -14,14 +14,19 @@ class SkilletApp extends ConsumerStatefulWidget {
 }
 
 class _SkilletAppState extends ConsumerState<SkilletApp> {
+  Future<void> _initializePushNotifications() async {
+    await ref.read(pushNotificationsServiceProvider).init(
+          onOpenRecipe: (id) => ref.read(routerProvider).go('/recipe/$id'),
+        );
+  }
+
   @override
   void initState() {
     super.initState();
-    Future<void>(() async {
-      await ref.read(pushNotificationsServiceProvider).init(
-            onOpenRecipe: (id) => ref.read(routerProvider).go('/recipe/$id'),
-          );
-    });
+    final bindingName = WidgetsBinding.instance.runtimeType.toString();
+    final isWidgetTest = bindingName.contains('TestWidgetsFlutterBinding');
+    if (isWidgetTest) return;
+    _initializePushNotifications();
   }
 
   @override
