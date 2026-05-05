@@ -10,13 +10,17 @@ class NotificationsService {
       FlutterLocalNotificationsPlugin();
   bool _initialized = false;
 
-  Future<void> init() async {
+  Future<void> init({void Function(String?)? onNotificationTap}) async {
     if (_initialized) return;
     tzdata.initializeTimeZones();
     const init = InitializationSettings(
       android: AndroidInitializationSettings('@mipmap/ic_launcher'),
     );
-    await _plugin.initialize(init);
+    await _plugin.initialize(
+      init,
+      onDidReceiveNotificationResponse: (resp) =>
+          onNotificationTap?.call(resp.payload),
+    );
     _initialized = true;
   }
 
@@ -114,6 +118,25 @@ class NotificationsService {
       matchDateTimeComponents: DateTimeComponents.time,
       payload: payload,
     );
+  }
+
+  Future<void> showInstant({
+    required int id,
+    required String title,
+    required String body,
+    String? payload,
+  }) async {
+    await init();
+    const details = NotificationDetails(
+      android: AndroidNotificationDetails(
+        'push_channel',
+        'Push notifications',
+        channelDescription: 'Notifications delivered while app is open',
+        importance: Importance.max,
+        priority: Priority.high,
+      ),
+    );
+    await _plugin.show(id, title, body, details, payload: payload);
   }
 
   Future<void> cancelAll() async {

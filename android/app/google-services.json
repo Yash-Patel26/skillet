@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "731923180429",
+    "project_id": "skillet-d8df6",
+    "storage_bucket": "skillet-d8df6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:731923180429:android:c9658b65dcaac31e0aabc4",
+        "android_client_info": {
+          "package_name": "com.skillet.in"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDunWT-CsleF4UM6jvJ28SV7ub6420mFC4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
